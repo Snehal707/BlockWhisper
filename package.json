@@ -25,20 +25,13 @@
     "wagmi": "^2.19.5"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
-    "@nomicfoundation/hardhat-network-helpers": "^3.0.3",
-    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "chai": "^6.2.2",
     "dotenv": "^17.2.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "ethers": "^6.16.0",
-    "hardhat": "^3.1.8",
     "solc": "^0.8.24",
     "tailwindcss": "^4",
     "typescript": "^5"
