@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 30;
+  --background-end-rgb: 0, 0, 0;
+
+  /* Theme Variables - Dark Mode Default */
+  --bg-primary: #0f0f1e;
+  --bg-secondary: #1a1a2e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --gradient-title: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+  /* Saturated 500s */
+  --gradient-title-reverse: linear-gradient(to right, #ec4899, #a855f7, #3b82f6);
+}
+
+:root.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 30;
+  --background-end-rgb: 0, 0, 0;
+  --bg-primary: #0f0f1e;
+  --bg-secondary: #1a1a2e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --gradient-title: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+  /* Saturated 500s */
+  --gradient-title-reverse: linear-gradient(to right, #ec4899, #a855f7, #3b82f6);
+}
+
+:root.light {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 240, 240, 255;
+
+  /* Theme Variables - Light Mode (Material 3 Inspired) */
+  --bg-primary: #fdfbff;
+  /* Surface */
+  --bg-secondary: #f3eff4;
+  /* Surface Container Low */
+  --text-primary: #1d1b20;
+  /* On Surface - High Contrast */
+  --text-secondary: #49454f;
+  /* On Surface Variant */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --gradient-title: linear-gradient(to right, #4f46e5, #9333ea, #db2777);
+  /* Vibrant Blue-Purple-Pink */
+  --gradient-title-reverse: linear-gradient(to right, #db2777, #9333ea, #4f46e5);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .light .glass-panel {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
