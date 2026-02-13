@@ -20,6 +20,10 @@ import { TransactionHistory } from './TransactionHistory';
 import { UserStats } from './UserStats';
 import { BarChart3 } from 'lucide-react';
 
+interface HomeClientProps {
+    initialFortune?: string | null;
+}
+
 export default function HomeClient({ initialFortune }: HomeClientProps) {
     const { address, isConnected } = useAccount();
     const [fortune, setFortune] = useState<string | null>(initialFortune || null);
@@ -304,7 +308,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex flex-col items-center gap-6 w-full"
                     >
-                        <FortuneCard displayFortune={fortune || ""} onShare={() => { }} />
+                        <FortuneCard displayFortune={fortune || ""} />
                         <MintFortuneButton fortune={fortune} />
                     </motion.div>
                 )}
