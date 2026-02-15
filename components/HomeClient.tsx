@@ -372,6 +372,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             >
                                 <FortuneCard displayFortune={fortune || ""} />
                                 <MintFortuneButton fortune={fortune} />
+                                <ShareButtons fortune={fortune || ""} />
                             </motion.div>
                         )}
 
