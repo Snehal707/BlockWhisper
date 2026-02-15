@@ -9,26 +9,20 @@ export function FarcasterProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const initSDK = async () => {
             try {
-                // Initialize the SDK
-                // Adding a small delay to ensure frame context is ready
-                setTimeout(async () => {
+                // Check for SDK in various locations as suggested
+                const farcasterSdk = (window as any).sdk || (window as any).farcasterSdk || (window as any).miniAppSdk || sdk;
+
+                if (farcasterSdk) {
+                    console.log('SDK found:', farcasterSdk);
                     console.log('Calling sdk.actions.ready()...');
-                    await sdk.actions.ready();
+                    await farcasterSdk.actions.ready();
                     setIsSDKLoaded(true);
                     console.log('Farcaster SDK initialized successfully');
-                }, 500);
+                } else {
+                    console.error('Farcaster SDK not found on window or via import');
+                }
             } catch (error) {
                 console.error('Error initializing Farcaster SDK:', error);
-                // Retry once on error
-                setTimeout(async () => {
-                    try {
-                        console.log('Retrying sdk.actions.ready()...');
-                        await sdk.actions.ready();
-                        setIsSDKLoaded(true);
-                    } catch (e) {
-                        console.error('Retry failed:', e);
-                    }
-                }, 2000);
             }
         };
 
