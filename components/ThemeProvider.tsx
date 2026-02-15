@@ -27,10 +27,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
                 document.documentElement.classList.remove('dark');
                 document.documentElement.classList.add('light');
             }
-        } else {
-            // Default to dark
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to dark if system prefers dark
+            setTheme('dark');
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');
+        } else {
+            // Default to light if system prefers light
+            setTheme('light');
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
         }
     }, []);
 
