@@ -3,14 +3,12 @@
 import {
     ConnectWallet,
     Wallet,
-    WalletDropdown,
-    WalletDropdownDisconnect,
-    WalletDropdownLink
 } from '@coinbase/onchainkit/wallet';
-import { Address, Avatar, Name, Identity, EthBalance } from '@coinbase/onchainkit/identity';
+import { Avatar } from '@coinbase/onchainkit/identity';
 import { useAccount } from 'wagmi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { sdk } from '@farcaster/miniapp-sdk';
 import { FloatingObjects } from '@/components/FloatingObjects';
 import { FortuneCard } from './FortuneCard';
 import { MintFortuneButton } from './MintFortuneButton';
@@ -30,6 +28,25 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
     const [isStatsOpen, setIsStatsOpen] = useState(false);
+    const [fcUser, setFcUser] = useState<{
+        username?: string;
+        displayName?: string;
+        pfpUrl?: string;
+    }>({});
+
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                const context = await sdk.context;
+                if (context?.user) {
+                    setFcUser(context.user);
+                }
+            } catch (err) {
+                console.error('Error loading Farcaster context:', err);
+            }
+        };
+        loadUser();
+    }, []);
 
     const handleReveal = async () => {
         if (!address) return;
@@ -176,24 +193,20 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             </motion.button>
                         )}
                         <ThemeToggle />
-                        <Wallet>
-                            <ConnectWallet className="max-w-[140px] sm:max-w-[180px] px-3 py-2 rounded-xl overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all">
-                                <Avatar className="h-6 w-6" />
-                                <Name />
-                            </ConnectWallet>
-                            <WalletDropdown>
-                                <Identity className="px-4 pt-3 pb-2 bg-slate-800" hasCopyAddressOnClick>
-                                    <Avatar />
-                                    <Name />
-                                    <Address />
-                                    <EthBalance />
-                                </Identity>
-                                <WalletDropdownLink icon="wallet" href="https://keys.coinbase.com">
-                                    Wallet
-                                </WalletDropdownLink>
-                                <WalletDropdownDisconnect />
-                            </WalletDropdown>
-                        </Wallet>
+
+                        {/* Farcaster Identity */}
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                            {fcUser.pfpUrl && (
+                                <img
+                                    src={fcUser.pfpUrl}
+                                    alt={fcUser.username}
+                                    className="w-8 h-8 rounded-full border border-white/10"
+                                />
+                            )}
+                            <span className="text-sm font-medium truncate max-w-[120px]" style={{ color: 'var(--text-primary)' }}>
+                                @{fcUser.username || "anon"}
+                            </span>
+                        </div>
                     </motion.div>
                 </div>
             </div>
@@ -259,6 +272,15 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                                 >
                                     ↓ Connect to begin ↓
                                 </motion.div>
+
+                                <div className="flex justify-center mt-6">
+                                    <Wallet>
+                                        <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all">
+                                            <span className="mr-2">Connect Wallet</span>
+                                            <Avatar className="h-6 w-6" />
+                                        </ConnectWallet>
+                                    </Wallet>
+                                </div>
                             </motion.div>
                         )}
 
