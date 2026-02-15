@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'BlockWhisper',
-    description: 'Your onchain fortune awaits.',
+    description: 'Connect your wallet to reveal what the blockchain spirits say about your past 24 hours on Base.',
     other: {
         'fc:miniapp': JSON.stringify({
             version: '1',

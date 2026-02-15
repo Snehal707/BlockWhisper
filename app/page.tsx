@@ -12,7 +12,7 @@ export async function generateMetadata(
     const fortune = searchParams.fortune as string | undefined;
 
     const title = fortune ? 'My Onchain Fortune' : 'BlockWhisper';
-    const description = fortune ? `"${fortune}"` : 'Reveal your destiny based on your onchain activity.';
+    const description = fortune ? `"${fortune}"` : 'Connect your wallet to reveal what the blockchain spirits say about your past 24 hours on Base.';
 
     // Use Vercel OG or similar service for dynamic image
     const ogImage = `/api/og?fortune=${encodeURIComponent(fortune || '')}`;
