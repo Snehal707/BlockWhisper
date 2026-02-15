@@ -112,10 +112,8 @@ export function UserStats({ address, isOpen, onClose }: StatsProps) {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
                         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                        className="fixed right-0 top-0 h-full w-full max-w-md z-50 flex flex-col"
-                        style={{
-                            background: 'linear-gradient(135deg, #0a0a1f 0%, #1a0a2e 50%, #0f0520 100%)',
-                        }}
+                        className="fixed right-0 top-0 h-full w-full max-w-md z-50 flex flex-col bg-white/90 dark:bg-[#0a0a1f] backdrop-blur-xl border-l border-white/20 dark:border-white/10"
+                        style={{}}
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-50"></div>
 
@@ -125,11 +123,11 @@ export function UserStats({ address, isOpen, onClose }: StatsProps) {
                                     <motion.h2
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"
+                                        className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400"
                                     >
                                         24h Aura
                                     </motion.h2>
-                                    <p className="text-gray-400 text-sm mt-1">Your onchain essence</p>
+                                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Your onchain essence</p>
                                     <a
                                         href={`https://basescan.org/address/${address}`}
                                         target="_blank"
@@ -151,7 +149,7 @@ export function UserStats({ address, isOpen, onClose }: StatsProps) {
                                     whileHover={{ scale: 1.1, rotate: 90 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={onClose}
-                                    className="p-2 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
+                                    className="p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
                                 >
                                     <X className="w-6 h-6" />
                                 </motion.button>
@@ -225,20 +223,15 @@ function QualitativeStatCard({ label, value, description, icon, gradient, delay 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay, type: 'spring', stiffness: 200 }}
             whileHover={{ scale: 1.02, y: -2 }}
-            className="p-6 rounded-3xl relative overflow-hidden group cursor-pointer"
-            style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-            }}
+            className="p-6 rounded-3xl relative overflow-hidden group cursor-pointer border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 shadow-sm dark:shadow-none hover:shadow-md transition-shadow"
         >
             <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
 
             <div className="relative z-10">
                 <div className="flex justify-between items-start mb-4">
                     <div>
-                        <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">{label}</p>
-                        <p className="text-gray-500 text-xs">{description}</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider mb-1">{label}</p>
+                        <p className="text-gray-600 dark:text-gray-500 text-xs">{description}</p>
                     </div>
                     <div className={`p-2 rounded-xl bg-gradient-to-br ${gradient}`}>
                         <div className="text-white">
