@@ -72,130 +72,137 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
 
             {/* Header */}
             {/* Header */}
-            <div className="z-20 w-full max-w-md flex items-center justify-between font-mono text-sm sticky top-0 pt-2 pb-2 bg-transparent">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-2xl md:text-3xl font-bold"
-                >
-                    <span style={{
-                        backgroundImage: 'var(--gradient-title)',
-                        backgroundClip: 'text',
-                        WebkitBackgroundClip: 'text',
-                        color: 'transparent'
-                    }}>
-                        Block
-                    </span>
-                    <span style={{ color: 'var(--text-primary)' }}>Whisper</span>
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex gap-4 items-center"
-                >
-                    {isConnected && (
-                        <motion.button
-                            onClick={() => setIsStatsOpen(true)}
-                            className="relative group p-3 rounded-2xl transition-all duration-300 overflow-hidden bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-black/10 dark:border-white/10 shadow-sm hover:shadow-md"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            title="View Your 24h Aura"
-                        >
-                            {/* Gradient background on hover */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                            {/* Crystal Ball Icon */}
-                            <motion.svg
-                                className="w-5 h-5 relative z-10"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                animate={{ rotate: [0, 5, -5, 0] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            <div className="z-20 w-full max-w-md flex items-center justify-between gap-2 overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent">
+                <div className="min-w-0 flex-1">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="text-2xl md:text-3xl font-bold truncate"
+                    >
+                        <span style={{
+                            backgroundImage: 'var(--gradient-title)',
+                            backgroundClip: 'text',
+                            WebkitBackgroundClip: 'text',
+                            color: 'transparent'
+                        }}>
+                            Block
+                        </span>
+                        <span style={{ color: 'var(--text-primary)' }}>Whisper</span>
+                    </motion.div>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex gap-2 items-center"
+                    >
+                        {isConnected && (
+                            <motion.button
+                                onClick={() => setIsStatsOpen(true)}
+                                className="relative group p-3 rounded-2xl transition-all duration-300 overflow-hidden bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-black/10 dark:border-white/10 shadow-sm hover:shadow-md"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                title="View Your 24h Aura"
                             >
-                                {/* Crystal Ball */}
-                                <circle
-                                    cx="12"
-                                    cy="11"
-                                    r="7"
-                                    stroke="url(#statsGradient)"
-                                    strokeWidth="1.5"
+                                {/* Gradient background on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                {/* Crystal Ball Icon */}
+                                <motion.svg
+                                    className="w-5 h-5 relative z-10"
+                                    viewBox="0 0 24 24"
                                     fill="none"
-                                    className="group-hover:fill-purple-500/10 transition-all"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    animate={{ rotate: [0, 5, -5, 0] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    {/* Crystal Ball */}
+                                    <circle
+                                        cx="12"
+                                        cy="11"
+                                        r="7"
+                                        stroke="url(#statsGradient)"
+                                        strokeWidth="1.5"
+                                        fill="none"
+                                        className="group-hover:fill-purple-500/10 transition-all"
+                                    />
+
+                                    {/* Inner glow circle */}
+                                    <circle
+                                        cx="12"
+                                        cy="11"
+                                        r="4"
+                                        stroke="url(#statsGradient)"
+                                        strokeWidth="1"
+                                        fill="none"
+                                        opacity="0.5"
+                                        className="group-hover:opacity-100 transition-opacity"
+                                    />
+
+                                    {/* Chart bars inside */}
+                                    <rect x="9" y="9" width="1.5" height="4" fill="url(#statsGradient)" rx="0.5" />
+                                    <rect x="11.5" y="7" width="1.5" height="6" fill="url(#statsGradient)" rx="0.5" />
+                                    <rect x="14" y="10" width="1.5" height="3" fill="url(#statsGradient)" rx="0.5" />
+
+                                    {/* Base/stand */}
+                                    <path
+                                        d="M7 18 Q12 19 17 18"
+                                        stroke="url(#statsGradient)"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        fill="none"
+                                    />
+                                    <ellipse cx="12" cy="18" rx="2" ry="0.5" fill="url(#statsGradient)" opacity="0.3" />
+
+                                    <defs>
+                                        <linearGradient id="statsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#2563EB" />
+                                            <stop offset="50%" stopColor="#7C3AED" />
+                                            <stop offset="100%" stopColor="#DB2777" />
+                                        </linearGradient>
+                                    </defs>
+                                </motion.svg>
+
+                                {/* Pulse effect */}
+                                <motion.div
+                                    className="absolute inset-0 rounded-2xl"
+                                    style={{
+                                        background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.3), rgba(244, 114, 182, 0.3))',
+                                        filter: 'blur(8px)',
+                                    }}
+                                    animate={{ opacity: [0, 0.5, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                                 />
-
-                                {/* Inner glow circle */}
-                                <circle
-                                    cx="12"
-                                    cy="11"
-                                    r="4"
-                                    stroke="url(#statsGradient)"
-                                    strokeWidth="1"
-                                    fill="none"
-                                    opacity="0.5"
-                                    className="group-hover:opacity-100 transition-opacity"
-                                />
-
-                                {/* Chart bars inside */}
-                                <rect x="9" y="9" width="1.5" height="4" fill="url(#statsGradient)" rx="0.5" />
-                                <rect x="11.5" y="7" width="1.5" height="6" fill="url(#statsGradient)" rx="0.5" />
-                                <rect x="14" y="10" width="1.5" height="3" fill="url(#statsGradient)" rx="0.5" />
-
-                                {/* Base/stand */}
-                                <path
-                                    d="M7 18 Q12 19 17 18"
-                                    stroke="url(#statsGradient)"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    fill="none"
-                                />
-                                <ellipse cx="12" cy="18" rx="2" ry="0.5" fill="url(#statsGradient)" opacity="0.3" />
-
-                                <defs>
-                                    <linearGradient id="statsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#2563EB" />
-                                        <stop offset="50%" stopColor="#7C3AED" />
-                                        <stop offset="100%" stopColor="#DB2777" />
-                                    </linearGradient>
-                                </defs>
-                            </motion.svg>
-
-                            {/* Pulse effect */}
-                            <motion.div
-                                className="absolute inset-0 rounded-2xl"
-                                style={{
-                                    background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.3), rgba(244, 114, 182, 0.3))',
-                                    filter: 'blur(8px)',
-                                }}
-                                animate={{ opacity: [0, 0.5, 0] }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            />
-                        </motion.button>
-                    )}
-                    <ThemeToggle />
-                    <Wallet>
-                        <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
-                            <Avatar className="h-6 w-6" />
-                            <Name />
-                        </ConnectWallet>
-                        <WalletDropdown>
-                            <Identity className="px-4 pt-3 pb-2 bg-slate-800" hasCopyAddressOnClick>
-                                <Avatar />
+                            </motion.button>
+                        )}
+                        <ThemeToggle />
+                        <Wallet>
+                            <ConnectWallet className="max-w-[140px] sm:max-w-[180px] px-3 py-2 rounded-xl overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <Avatar className="h-6 w-6" />
                                 <Name />
-                                <Address />
-                                <EthBalance />
-                            </Identity>
-                            <WalletDropdownLink icon="wallet" href="https://keys.coinbase.com">
-                                Wallet
-                            </WalletDropdownLink>
-                            <WalletDropdownDisconnect />
-                        </WalletDropdown>
-                    </Wallet>
-                </motion.div>
+                            </ConnectWallet>
+                            <WalletDropdown>
+                                <Identity className="px-4 pt-3 pb-2 bg-slate-800" hasCopyAddressOnClick>
+                                    <Avatar />
+                                    <Name />
+                                    <Address />
+                                    <EthBalance />
+                                </Identity>
+                                <WalletDropdownLink icon="wallet" href="https://keys.coinbase.com">
+                                    Wallet
+                                </WalletDropdownLink>
+                                <WalletDropdownDisconnect />
+                            </WalletDropdown>
+                        </Wallet>
+                    </motion.div>
+                </div>
             </div>
 
             {/* Main Scroll Container */}
-            <div className="relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pt-4 pb-6">
+            <div
+                className="relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pb-6"
+                style={{ paddingTop: "max(1rem, env(safe-area-inset-top))" }}
+            >
                 <div className="flex flex-col items-center gap-4">
                     {/* Main Content */}
                     <div className="relative w-full">
