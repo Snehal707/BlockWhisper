@@ -12,6 +12,22 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: 'BlockWhisper',
     description: 'Your onchain fortune awaits.',
+    other: {
+        'fc:frame': JSON.stringify({
+            version: 'next',
+            imageUrl: 'https://blockwhisper.vercel.app/splash.png',
+            button: {
+                title: 'Reveal Your Fortune',
+                action: {
+                    type: 'launch_frame',
+                    name: 'BlockWhisper',
+                    url: 'https://blockwhisper.vercel.app',
+                    splashImageUrl: 'https://blockwhisper.vercel.app/splash.png',
+                    splashBackgroundColor: '#0a0a1f',
+                },
+            },
+        }),
+    },
 };
 
 export default function RootLayout({
