@@ -240,7 +240,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                 <div className="flex flex-col items-center gap-6">
                     {/* Main Content */}
                     <div className="relative w-full">
-                        <div className={isMiniApp ? "flex flex-col items-center gap-6" : "flex flex-col items-center gap-8 text-center"}>
+                        <div className={isMiniApp ? "flex flex-col items-center gap-4" : "flex flex-col items-center gap-8 text-center"}>
                             {!isConnected && (
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -252,14 +252,14 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                                         <motion.div
                                             animate={{ y: [0, -20, 0] }}
                                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                            className="text-8xl mb-4 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                                            className={`${isMiniApp ? "text-6xl mb-2" : "text-8xl mb-4"} filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]`}
                                         >
                                             🔮
                                         </motion.div>
                                         <div className="absolute -inset-4 bg-purple-500/20 blur-3xl -z-10 rounded-full"></div>
                                     </div>
 
-                                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
+                                    <h1 className={`${isMiniApp ? "text-4xl mb-4" : "text-6xl md:text-8xl mb-8"} font-bold tracking-tighter`}>
                                         <span className="block mb-2"
                                             style={{
                                                 backgroundImage: 'var(--gradient-title)',
@@ -282,14 +282,17 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                                         </span>
                                     </h1>
 
-                                    <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                        Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.
+                                    <p className={`${isMiniApp ? "text-base max-w-sm" : "text-xl max-w-2xl"} mx-auto leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
+                                        {isMiniApp
+                                            ? "Reveal what the blockchain spirits say about your history."
+                                            : <>Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.</>
+                                        }
                                     </p>
 
                                     <motion.div
                                         animate={{ opacity: [0.5, 1, 0.5] }}
                                         transition={{ duration: 2, repeat: Infinity }}
-                                        className="text-sm font-mono mt-8"
+                                        className={`${isMiniApp ? "text-xs mt-4" : "text-sm font-mono mt-8"}`}
                                         style={{ color: 'var(--text-secondary)' }}
                                     >
                                         ↓ Connect to begin ↓
