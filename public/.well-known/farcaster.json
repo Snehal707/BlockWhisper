@@ -7,12 +7,12 @@
     "frame": {
         "version": "1",
         "name": "BlockWhisper",
-        "iconUrl": "https://blockwhisper.vercel.app/icon.png",
-        "homeUrl": "https://blockwhisper.vercel.app",
-        "imageUrl": "https://blockwhisper.vercel.app/splash.png",
+        "iconUrl": "https://block-whisper.vercel.app/icon.png",
+        "homeUrl": "https://block-whisper.vercel.app",
+        "imageUrl": "https://block-whisper.vercel.app/splash.png",
         "buttonTitle": "Reveal Your Fortune",
-        "splashImageUrl": "https://blockwhisper.vercel.app/splash.png",
+        "splashImageUrl": "https://block-whisper.vercel.app/splash.png",
         "splashBackgroundColor": "#0a0a1f",
-        "webhookUrl": "https://blockwhisper.vercel.app/api/webhook"
+        "webhookUrl": "https://block-whisper.vercel.app/api/webhook"
     }
 }
