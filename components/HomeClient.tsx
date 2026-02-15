@@ -2,6 +2,7 @@
 
 import { useIsMiniApp } from '@/hooks/useIsMiniApp';
 import FarcasterClient from '@/app/mini/farcaster/client';
+import { NotificationToggle } from './NotificationToggle';
 import WebClient from '@/app/web/client';
 
 interface HomeClientProps {
