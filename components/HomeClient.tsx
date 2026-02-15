@@ -123,7 +123,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className={`${isMiniApp ? "text-lg" : "text-2xl md:text-3xl"} font-bold truncate`}
+                            className={`${isMiniApp ? "text-base" : "text-2xl md:text-3xl"} font-bold whitespace-nowrap leading-none`}
                         >
                             <span style={{
                                 backgroundImage: 'var(--gradient-title)',
