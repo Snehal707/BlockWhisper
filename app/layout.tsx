@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: 'BlockWhisper',
     description: 'Connect your wallet to reveal what the blockchain spirits say about your past 24 hours on Base.',
     other: {
+        'base:app_id': '6991c25ae0d5d2cf831b5cd3',
         'fc:miniapp': JSON.stringify({
             version: '1',
             imageUrl: 'https://block-whisper.vercel.app/icon.png',
