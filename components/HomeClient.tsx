@@ -41,15 +41,19 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
     // Dynamic styles based on environment
     const shellClass = isMiniApp
         ? "relative h-[100dvh] w-full overflow-hidden flex flex-col items-center p-4"
-        : "relative min-h-screen w-full overflow-x-hidden flex flex-col items-center p-8";
+        : "relative min-h-screen w-full overflow-x-hidden flex flex-col items-center px-12 py-10";
 
     const contentClass = isMiniApp
-        ? "w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden"
-        : "w-full max-w-6xl flex-1";
+        ? "relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pt-4 pb-6"
+        : "relative z-10 w-full max-w-6xl flex-1 pt-10 pb-10";
 
     const headerClass = isMiniApp
-        ? "z-20 w-full max-w-md overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none"
-        : "z-20 w-full max-w-6xl overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none";
+        ? "z-20 w-full max-w-md flex items-center justify-between gap-2 overflow-hidden sticky top-0 pt-2 pb-2"
+        : "z-20 w-full max-w-6xl flex items-center justify-between gap-4 pt-4 pb-4";
+
+    const footerClass = isMiniApp
+        ? "py-4 text-center text-gray-500 text-sm"
+        : "py-6 text-center text-gray-500 text-base";
 
     useEffect(() => {
         const loadUser = async () => {
@@ -111,7 +115,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="text-2xl md:text-3xl font-bold truncate"
+                            className={`${isMiniApp ? "text-lg" : "text-2xl md:text-3xl"} font-bold truncate`}
                         >
                             <span style={{
                                 backgroundImage: 'var(--gradient-title)',
@@ -231,11 +235,8 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             </div>
 
             {/* Main Scroll Container */}
-            <div
-                className={`${contentClass} relative z-10 flex flex-col`}
-                style={{ paddingTop: isMiniApp ? "max(1rem, env(safe-area-inset-top))" : "1rem" }}
-            >
-                <div className="flex flex-col items-center gap-4 flex-1">
+            <div className={contentClass}>
+                <div className="flex flex-col items-center gap-6">
                     {/* Main Content */}
                     <div className="relative w-full">
                         {!isConnected && (
@@ -316,7 +317,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                                 </h2>
                                 <button
                                     onClick={handleReveal}
-                                    className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full text-2xl font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-110 active:scale-95"
+                                    className="group relative w-full max-w-xs md:max-w-sm lg:max-w-md py-4 text-lg bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-105 active:scale-95"
                                 >
                                     <span className="relative z-10 flex items-center gap-3">
                                         <span>Reveal My Fortune</span>
@@ -386,7 +387,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className="py-4 text-center text-gray-500 text-sm"
+                    className={footerClass}
                 >
                     <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 3</span></p>
                 </motion.div>
