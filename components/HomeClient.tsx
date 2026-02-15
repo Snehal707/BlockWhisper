@@ -41,15 +41,15 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
     // Dynamic styles based on environment
     const shellClass = isMiniApp
         ? "relative h-[100dvh] w-full overflow-hidden flex flex-col items-center p-4"
-        : "relative min-h-screen w-full overflow-x-hidden flex flex-col items-center px-12 py-10";
+        : "relative min-h-screen w-full overflow-x-hidden";
 
-    const contentClass = isMiniApp
-        ? "relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pt-4 pb-6"
-        : "relative z-10 w-full max-w-6xl flex-1 pt-10 pb-10";
+    const bodyWrapClass = isMiniApp
+        ? "relative z-10 w-full max-w-md mx-auto flex-1 overflow-y-auto overflow-x-hidden px-4 pt-4 pb-6"
+        : "relative z-10 w-full max-w-6xl mx-auto px-12 pt-16 pb-16";
 
-    const headerClass = isMiniApp
-        ? "z-20 w-full max-w-md flex items-center justify-between gap-2 overflow-hidden sticky top-0 pt-2 pb-2"
-        : "z-20 w-full max-w-6xl flex items-center justify-between gap-6 pt-6 pb-4";
+    const headerWrapClass = isMiniApp
+        ? "z-20 w-full max-w-md mx-auto flex items-center justify-between gap-2 pt-2 pb-2 px-4"
+        : "z-20 w-full max-w-6xl mx-auto flex items-center justify-between gap-6 pt-6 pb-4 px-12";
 
     const footerClass = isMiniApp
         ? "py-4 text-center text-gray-500 text-sm"
@@ -109,8 +109,8 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             <FloatingObjects keywords={keywords.length > 0 ? keywords : ['star', 'moon', 'crystal']} />
 
             {/* Header */}
-            <div className={headerClass}>
-                <div className="flex items-center justify-between gap-2 pointer-events-auto">
+            <div className={headerWrapClass}>
+                <div className="flex items-center justify-between gap-2 pointer-events-auto w-full">
                     <div className="min-w-0 flex-1">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -236,11 +236,11 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
 
             {/* Main Scroll Container */}
             {/* Main Scroll Container */}
-            <div className={contentClass}>
-                <div className="flex flex-col items-center gap-6 md:items-start md:gap-4">
+            <div className={bodyWrapClass}>
+                <div className="flex flex-col items-center gap-6">
                     {/* Main Content */}
                     <div className="relative w-full">
-                        <div className="w-full flex flex-col items-center md:items-start md:mt-20">
+                        <div className={isMiniApp ? "flex flex-col items-center gap-6" : "flex flex-col items-center gap-8 text-center"}>
                             {!isConnected && (
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -319,9 +319,9 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                                     </h2>
                                     <button
                                         onClick={handleReveal}
-                                        className="group relative w-full max-w-xs md:max-w-md lg:max-w-lg py-4 text-lg md:text-xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-105 active:scale-95"
+                                        className="group relative w-full py-4 text-lg md:text-xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-105 active:scale-95"
                                     >
-                                        <span className="relative z-10 flex items-center gap-3">
+                                        <span className="relative z-10 flex items-center justify-center gap-3">
                                             <span>Reveal My Fortune</span>
                                             <span className="group-hover:rotate-12 transition-transform">🌟</span>
                                         </span>
