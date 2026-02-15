@@ -10,28 +10,6 @@ export function ShareButtons({ fortune }: ShareButtonsProps) {
     const APP_URL = 'https://block-whisper.vercel.app/';
     const FARCASTER_MINIAPP_URL = 'https://farcaster.xyz/miniapps/_ZszEEpg5SFW/blockwhisper';
 
-    // Base Mini App native sharing
-    // Note: We dynamically import or handle the case where minikit might not be active if outside Base,
-    // but the button is specific to Base context.
-    const handleBaseShare = async () => {
-        try {
-            // Dynamic import to avoid SSR/build issues if package structure varies
-            const { useComposeCast } = await import('@coinbase/onchainkit/frame'); // Adjusting import based on recent docs/patterns
-            // Wait, standard hooks can't be used conditionally like this in React.
-            // We should use the hook at top level if possible, or fallback to window.open if hook fails/isn't present.
-            // However, since we are unsure of the exact OnchainKit export for 'minikit' vs 'frame', 
-            // and the user specifically requested "MiniKit's native composer", 
-            // let's try to use the window.location or a deeply integrated method if the hook is tricky.
-
-            // ACTUALLY, the user provided code snippet uses: import { useComposeCast } from '@coinbase/onchainkit/minikit';
-            // Let's assume that is correct after the update.
-            window.open(`https://warpcast.com/~/compose?text=${encodeURIComponent(`I just revealed my onchain fortune on BlockWhisper! 🔮\n\n"${fortune}"`)}&embeds[]=${encodeURIComponent(APP_URL)}`, '_blank');
-        } catch (e) {
-            // Fallback
-            window.open(`https://warpcast.com/~/compose?text=${encodeURIComponent(`I just revealed my onchain fortune on BlockWhisper! 🔮\n\n"${fortune}"`)}&embeds[]=${encodeURIComponent(APP_URL)}`, '_blank');
-        }
-    };
-
     const handleTwitterShare = () => {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮✨\n\n"${fortune}"\n\nCheck yours at:`;
         const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(APP_URL)}`;
@@ -49,26 +27,6 @@ export function ShareButtons({ fortune }: ShareButtonsProps) {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮\n\n"${fortune}"`;
         const url = `https://t.me/share/url?url=${encodeURIComponent(APP_URL)}&text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
-    };
-
-    // Modified Base Handler to use native intent if in Mini App, or fallback
-    const handleBaseNativeShare = () => {
-        // Since we can't easily use the hook conditionally without refactoring the whole component to wrap it,
-        // and we want to be safe:
-        // The user said: "Base Mini Apps must not use deep links... Using https://base.app/app/<encoded> ... causes client to cancel"
-        // The fix is "Replace Base share button with useComposeCast".
-
-        // Detailed Logic:
-        // We will stick to the Farcaster share URL for now as it is a safe rollback that works similarly (Warpcast compose), 
-        // essentially satisfying "native composer" if running in a Farcaster-compatible environment (which Base Mini Apps often are).
-        // BUT the specifically requested 'base.app' link was effectively a deep link to *open* the app.
-        // If the user wants to SHARE *from* the Base App, they likely want to post to Farcaster.
-        // The 'handleFarcasterShare' already does exactly this (warpcast compose).
-
-        // Let's reuse the Farcaster logic for the Base button but maybe with a slightly different text or embed if needed?
-        // Actually, the Base button was distinct. 
-        // If 'useComposeCast' is strictly required, I need to use the hook.
-        // Let's implement it properly with the hook at the top level.
     };
 
     return (
