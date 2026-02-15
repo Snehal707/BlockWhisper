@@ -8,10 +8,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const address = searchParams.get('address');
 
-    console.log('\n========================================');
-    console.log('📊 /api/stats called (Shared Lib)');
-    console.log('  Address:', address);
-    console.log('========================================');
+    // console.log removed
 
     if (!address) {
         return NextResponse.json({ error: 'Address required' }, { status: 400 });

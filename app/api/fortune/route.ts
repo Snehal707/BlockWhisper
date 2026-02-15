@@ -35,8 +35,7 @@ export async function POST(req: NextRequest) {
       `;
         }
 
-        console.log('🔮 Generating fortune for:', address);
-        console.log('📝 Summary:', summary);
+        // Logs removed
 
         // 3. Generate Fortune via LLM
         const fortuneData = await generateFortune(summary);

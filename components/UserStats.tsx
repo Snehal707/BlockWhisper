@@ -57,15 +57,6 @@ export function UserStats({ address, isOpen, onClose }: StatsProps) {
             const received = data.received || [];
             const totalCount = data.totalCount || 0;
 
-            console.log('Stats fetched:', {
-                txs: txs.length,
-                tokens: tokens.length,
-                nfts: nfts.length,
-                sent: sent.length,
-                received: received.length,
-                totalCount
-            });
-
             // Calculate Energy: Based on total activity
             let energy: EnergyLevel = 'Low';
             if (totalCount >= 10) energy = 'High';
