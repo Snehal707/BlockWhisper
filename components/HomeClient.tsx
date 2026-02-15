@@ -89,30 +89,28 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
 
             {/* Header */}
             {/* Header */}
-            <div className="z-20 w-full max-w-md flex items-center justify-between gap-2 overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent">
-                <div className="min-w-0 flex-1">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="text-2xl md:text-3xl font-bold truncate"
-                    >
-                        <span style={{
-                            backgroundImage: 'var(--gradient-title)',
-                            backgroundClip: 'text',
-                            WebkitBackgroundClip: 'text',
-                            color: 'transparent'
-                        }}>
-                            Block
-                        </span>
-                        <span style={{ color: 'var(--text-primary)' }}>Whisper</span>
-                    </motion.div>
-                </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex gap-2 items-center"
-                    >
+            {/* Header */}
+            <div className="z-20 w-full max-w-md overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none">
+                <div className="flex items-center justify-between gap-2 pointer-events-auto">
+                    <div className="min-w-0 flex-1">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-2xl md:text-3xl font-bold truncate"
+                        >
+                            <span style={{
+                                backgroundImage: 'var(--gradient-title)',
+                                backgroundClip: 'text',
+                                WebkitBackgroundClip: 'text',
+                                color: 'transparent'
+                            }}>
+                                Block
+                            </span>
+                            <span style={{ color: 'var(--text-primary)' }}>Whisper</span>
+                        </motion.div>
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-shrink-0">
                         {isConnected && (
                             <motion.button
                                 onClick={() => setIsStatsOpen(true)}
@@ -193,20 +191,26 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             </motion.button>
                         )}
                         <ThemeToggle />
+                    </div>
+                </div>
 
-                        {/* Farcaster Identity */}
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                            {fcUser.pfpUrl && (
-                                <img
-                                    src={fcUser.pfpUrl}
-                                    alt={fcUser.username}
-                                    className="w-8 h-8 rounded-full border border-white/10"
-                                />
-                            )}
-                            <span className="text-sm font-medium truncate max-w-[120px]" style={{ color: 'var(--text-primary)' }}>
-                                @{fcUser.username || "anon"}
-                            </span>
-                        </div>
+                {/* Second Row: Farcaster Identity */}
+                <div className="mt-2 flex justify-end pointer-events-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-2 bg-white/5 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10"
+                    >
+                        {fcUser.pfpUrl && (
+                            <img
+                                src={fcUser.pfpUrl}
+                                alt={fcUser.username}
+                                className="w-5 h-5 rounded-full"
+                            />
+                        )}
+                        <span className="text-xs font-medium truncate max-w-[120px]" style={{ color: 'var(--text-secondary)' }}>
+                            @{fcUser.username || "anon"}
+                        </span>
                     </motion.div>
                 </div>
             </div>
