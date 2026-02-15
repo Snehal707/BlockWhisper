@@ -105,8 +105,6 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             <FloatingObjects keywords={keywords.length > 0 ? keywords : ['star', 'moon', 'crystal']} />
 
             {/* Header */}
-            {/* Header */}
-            {/* Header */}
             <div className={headerClass}>
                 <div className="flex items-center justify-between gap-2 pointer-events-auto">
                     <div className="min-w-0 flex-1">
@@ -232,7 +230,6 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                 </div>
             </div>
 
-            {/* Main Scroll Container */}
             {/* Main Scroll Container */}
             <div
                 className={`${contentClass} relative z-10 flex flex-col`}
