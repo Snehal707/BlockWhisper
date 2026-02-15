@@ -9,7 +9,8 @@ interface ShareButtonsProps {
 export function ShareButtons({ fortune }: ShareButtonsProps) {
     const APP_URL = 'https://block-whisper.vercel.app/';
     const FARCASTER_MINIAPP_URL = 'https://farcaster.xyz/miniapps/_ZszEEpg5SFW/blockwhisper';
-    const BASE_APP_URL = 'https://base.app/app/https://block-whisper.vercel.app/';
+    // Use encodeURIComponent for the nested URL to ensure robust deep linking
+    const BASE_APP_URL = `https://base.app/app/${encodeURIComponent('https://block-whisper.vercel.app/')}`;
 
     const handleTwitterShare = () => {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮✨\n\n"${fortune}"\n\nCheck yours at:`;
