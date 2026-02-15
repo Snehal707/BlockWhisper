@@ -49,7 +49,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
 
     const headerClass = isMiniApp
         ? "z-20 w-full max-w-md flex items-center justify-between gap-2 overflow-hidden sticky top-0 pt-2 pb-2"
-        : "z-20 w-full max-w-6xl flex items-center justify-between gap-4 pt-4 pb-4";
+        : "z-20 w-full max-w-6xl flex items-center justify-between gap-6 pt-6 pb-4";
 
     const footerClass = isMiniApp
         ? "py-4 text-center text-gray-500 text-sm"
@@ -235,98 +235,102 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             </div>
 
             {/* Main Scroll Container */}
+            {/* Main Scroll Container */}
             <div className={contentClass}>
-                <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center gap-6 md:items-start md:gap-4">
                     {/* Main Content */}
                     <div className="relative w-full">
-                        {!isConnected && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="text-center space-y-8"
-                            >
-                                <div className="relative">
-                                    <motion.div
-                                        animate={{ y: [0, -20, 0] }}
-                                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                        className="text-8xl mb-4 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
-                                    >
-                                        🔮
-                                    </motion.div>
-                                    <div className="absolute -inset-4 bg-purple-500/20 blur-3xl -z-10 rounded-full"></div>
-                                </div>
-
-                                <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
-                                    <span className="block mb-2"
-                                        style={{
-                                            backgroundImage: 'var(--gradient-title)',
-                                            backgroundClip: 'text',
-                                            WebkitBackgroundClip: 'text',
-                                            color: 'transparent',
-                                            backgroundSize: '200% auto',
-                                        }}>
-                                        Your Chain.
-                                    </span>
-                                    <span className="block"
-                                        style={{
-                                            backgroundImage: 'var(--gradient-title-reverse)',
-                                            backgroundClip: 'text',
-                                            WebkitBackgroundClip: 'text',
-                                            color: 'transparent',
-                                            backgroundSize: '200% auto',
-                                        }}>
-                                        Your Destiny.
-                                    </span>
-                                </h1>
-
-                                <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                    Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.
-                                </p>
-
+                        <div className="w-full flex flex-col items-center md:items-start md:mt-20">
+                            {!isConnected && (
                                 <motion.div
-                                    animate={{ opacity: [0.5, 1, 0.5] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                    className="text-sm font-mono mt-8"
-                                    style={{ color: 'var(--text-secondary)' }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="text-center space-y-8"
                                 >
-                                    ↓ Connect to begin ↓
+                                    <div className="relative">
+                                        <motion.div
+                                            animate={{ y: [0, -20, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                            className="text-8xl mb-4 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                                        >
+                                            🔮
+                                        </motion.div>
+                                        <div className="absolute -inset-4 bg-purple-500/20 blur-3xl -z-10 rounded-full"></div>
+                                    </div>
+
+                                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
+                                        <span className="block mb-2"
+                                            style={{
+                                                backgroundImage: 'var(--gradient-title)',
+                                                backgroundClip: 'text',
+                                                WebkitBackgroundClip: 'text',
+                                                color: 'transparent',
+                                                backgroundSize: '200% auto',
+                                            }}>
+                                            Your Chain.
+                                        </span>
+                                        <span className="block"
+                                            style={{
+                                                backgroundImage: 'var(--gradient-title-reverse)',
+                                                backgroundClip: 'text',
+                                                WebkitBackgroundClip: 'text',
+                                                color: 'transparent',
+                                                backgroundSize: '200% auto',
+                                            }}>
+                                            Your Destiny.
+                                        </span>
+                                    </h1>
+
+                                    <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                                        Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.
+                                    </p>
+
+                                    <motion.div
+                                        animate={{ opacity: [0.5, 1, 0.5] }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                        className="text-sm font-mono mt-8"
+                                        style={{ color: 'var(--text-secondary)' }}
+                                    >
+                                        ↓ Connect to begin ↓
+                                    </motion.div>
+
+                                    <div className="flex justify-center mt-6">
+                                        <Wallet>
+                                            <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all">
+                                                <span className="mr-2">Connect Wallet</span>
+                                                <Avatar className="h-6 w-6" />
+                                            </ConnectWallet>
+                                        </Wallet>
+                                    </div>
                                 </motion.div>
+                            )}
 
-                                <div className="flex justify-center mt-6">
-                                    <Wallet>
-                                        <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all">
-                                            <span className="mr-2">Connect Wallet</span>
-                                            <Avatar className="h-6 w-6" />
-                                        </ConnectWallet>
-                                    </Wallet>
-                                </div>
-                            </motion.div>
-                        )}
-
-                        {isConnected && !fortune && !loading && (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5 }}
-                                className="text-center space-y-8"
-                            >
-                                <div className="text-6xl mb-4">✨</div>
-                                <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                                    Ready to <span className="text-purple-400">Whisper</span>?
-                                </h2>
-                                <button
-                                    onClick={handleReveal}
-                                    className="group relative w-full max-w-xs md:max-w-sm lg:max-w-md py-4 text-lg bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-105 active:scale-95"
+                            {isConnected && !fortune && !loading && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-center space-y-8"
                                 >
-                                    <span className="relative z-10 flex items-center gap-3">
-                                        <span>Reveal My Fortune</span>
-                                        <span className="group-hover:rotate-12 transition-transform">🌟</span>
-                                    </span>
-                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 blur transition-opacity"></div>
-                                </button>
-                            </motion.div>
-                        )}
+                                    <div className="text-6xl mb-4">✨</div>
+                                    <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
+                                        Ready to <span className="text-purple-400">Whisper</span>?
+                                    </h2>
+                                    <button
+                                        onClick={handleReveal}
+                                        className="group relative w-full max-w-xs md:max-w-md lg:max-w-lg py-4 text-lg md:text-xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-105 active:scale-95"
+                                    >
+                                        <span className="relative z-10 flex items-center gap-3">
+                                            <span>Reveal My Fortune</span>
+                                            <span className="group-hover:rotate-12 transition-transform">🌟</span>
+                                        </span>
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 blur transition-opacity"></div>
+                                    </button>
+                                </motion.div>
+                            )}
+
+                        </div>
 
                         {loading && (
                             <motion.div
