@@ -52,8 +52,10 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
     };
 
     return (
-        <main className="flex min-h-[100dvh] flex-col items-center justify-start md:justify-center p-4 relative overflow-y-auto overflow-x-hidden transition-colors duration-300"
-            style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
+        <main
+            className="relative h-[100dvh] w-full overflow-hidden flex flex-col items-center p-4"
+            style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
+        >
             <UserStats
                 address={address || ''}
                 isOpen={isStatsOpen}
@@ -69,7 +71,8 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             <FloatingObjects keywords={keywords.length > 0 ? keywords : ['star', 'moon', 'crystal']} />
 
             {/* Header */}
-            <div className="z-10 w-full max-w-6xl items-center justify-between font-mono text-sm flex absolute top-4 px-4 md:px-8">
+            {/* Header */}
+            <div className="z-20 w-full max-w-md flex items-center justify-between font-mono text-sm sticky top-0 pt-2 pb-2 bg-transparent">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -191,150 +194,155 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                 </motion.div>
             </div>
 
-            {/* Main Content */}
-            <div className="relative z-10 flex flex-col items-center gap-4 max-w-4xl mx-auto w-full pt-20 pb-20">
-                {!isConnected && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center space-y-8"
-                    >
-                        <div className="relative">
+            {/* Main Scroll Container */}
+            <div className="relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pt-4 pb-6">
+                <div className="flex flex-col items-center gap-4">
+                    {/* Main Content */}
+                    <div className="relative w-full">
+                        {!isConnected && (
                             <motion.div
-                                animate={{ y: [0, -20, 0] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="text-8xl mb-4 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                                className="text-center space-y-8"
                             >
-                                🔮
-                            </motion.div>
-                            <div className="absolute -inset-4 bg-purple-500/20 blur-3xl -z-10 rounded-full"></div>
-                        </div>
+                                <div className="relative">
+                                    <motion.div
+                                        animate={{ y: [0, -20, 0] }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                        className="text-8xl mb-4 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                                    >
+                                        🔮
+                                    </motion.div>
+                                    <div className="absolute -inset-4 bg-purple-500/20 blur-3xl -z-10 rounded-full"></div>
+                                </div>
 
-                        <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
-                            <span className="block mb-2"
-                                style={{
-                                    backgroundImage: 'var(--gradient-title)',
-                                    backgroundClip: 'text',
-                                    WebkitBackgroundClip: 'text',
-                                    color: 'transparent',
-                                    backgroundSize: '200% auto',
-                                }}>
-                                Your Chain.
-                            </span>
-                            <span className="block"
-                                style={{
-                                    backgroundImage: 'var(--gradient-title-reverse)',
-                                    backgroundClip: 'text',
-                                    WebkitBackgroundClip: 'text',
-                                    color: 'transparent',
-                                    backgroundSize: '200% auto',
-                                }}>
-                                Your Destiny.
-                            </span>
-                        </h1>
+                                <h1 className="text-6xl md:text-8xl font-bold tracking-tighter">
+                                    <span className="block mb-2"
+                                        style={{
+                                            backgroundImage: 'var(--gradient-title)',
+                                            backgroundClip: 'text',
+                                            WebkitBackgroundClip: 'text',
+                                            color: 'transparent',
+                                            backgroundSize: '200% auto',
+                                        }}>
+                                        Your Chain.
+                                    </span>
+                                    <span className="block"
+                                        style={{
+                                            backgroundImage: 'var(--gradient-title-reverse)',
+                                            backgroundClip: 'text',
+                                            WebkitBackgroundClip: 'text',
+                                            color: 'transparent',
+                                            backgroundSize: '200% auto',
+                                        }}>
+                                        Your Destiny.
+                                    </span>
+                                </h1>
 
-                        <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                            Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.
-                        </p>
+                                <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                                    Connect your wallet to reveal what the <span className="font-semibold text-purple-400">blockchain spirits</span> say about your past 24 hours on Base.
+                                </p>
 
-                        <motion.div
-                            animate={{ opacity: [0.5, 1, 0.5] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="text-sm font-mono mt-8"
-                            style={{ color: 'var(--text-secondary)' }}
-                        >
-                            ↓ Connect to begin ↓
-                        </motion.div>
-                    </motion.div>
-                )}
-
-                {isConnected && !fortune && !loading && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center space-y-8"
-                    >
-                        <div className="text-6xl mb-4">✨</div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-                            Ready to <span className="text-purple-400">Whisper</span>?
-                        </h2>
-                        <button
-                            onClick={handleReveal}
-                            className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full text-2xl font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-110 active:scale-95"
-                        >
-                            <span className="relative z-10 flex items-center gap-3">
-                                <span>Reveal My Fortune</span>
-                                <span className="group-hover:rotate-12 transition-transform">🌟</span>
-                            </span>
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 blur transition-opacity"></div>
-                        </button>
-                    </motion.div>
-                )}
-
-                {loading && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="flex flex-col items-center gap-6"
-                    >
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                            className="text-8xl"
-                        >
-                            🔮
-                        </motion.div>
-                        <div className="text-2xl text-purple-300 font-semibold">
-                            Reading the blockchain...
-                        </div>
-                        <div className="flex gap-2">
-                            {[0, 1, 2].map((i) => (
                                 <motion.div
-                                    key={i}
-                                    animate={{ scale: [1, 1.5, 1] }}
-                                    transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                                    className="w-3 h-3 bg-purple-500 rounded-full"
-                                ></motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
+                                    animate={{ opacity: [0.5, 1, 0.5] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                    className="text-sm font-mono mt-8"
+                                    style={{ color: 'var(--text-secondary)' }}
+                                >
+                                    ↓ Connect to begin ↓
+                                </motion.div>
+                            </motion.div>
+                        )}
 
-                {fortune && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex flex-col items-center gap-6 w-full"
-                    >
-                        <FortuneCard displayFortune={fortune || ""} />
-                        <MintFortuneButton fortune={fortune} />
-                    </motion.div>
-                )}
+                        {isConnected && !fortune && !loading && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5 }}
+                                className="text-center space-y-8"
+                            >
+                                <div className="text-6xl mb-4">✨</div>
+                                <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
+                                    Ready to <span className="text-purple-400">Whisper</span>?
+                                </h2>
+                                <button
+                                    onClick={handleReveal}
+                                    className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full text-2xl font-bold shadow-[0_0_40px_rgba(147,51,234,0.6)] hover:shadow-[0_0_60px_rgba(147,51,234,0.9)] transition-all transform hover:scale-110 active:scale-95"
+                                >
+                                    <span className="relative z-10 flex items-center gap-3">
+                                        <span>Reveal My Fortune</span>
+                                        <span className="group-hover:rotate-12 transition-transform">🌟</span>
+                                    </span>
+                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 blur transition-opacity"></div>
+                                </button>
+                            </motion.div>
+                        )}
 
-                {/* Transaction History Section */}
-                {isConnected && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="mt-6 w-full"
-                    >
-                        <TransactionHistory />
-                    </motion.div>
-                )}
+                        {loading && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="flex flex-col items-center gap-6"
+                            >
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                    className="text-8xl"
+                                >
+                                    🔮
+                                </motion.div>
+                                <div className="text-2xl text-purple-300 font-semibold">
+                                    Reading the blockchain...
+                                </div>
+                                <div className="flex gap-2">
+                                    {[0, 1, 2].map((i) => (
+                                        <motion.div
+                                            key={i}
+                                            animate={{ scale: [1, 1.5, 1] }}
+                                            transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                                            className="w-3 h-3 bg-purple-500 rounded-full"
+                                        ></motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {fortune && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex flex-col items-center gap-6 w-full"
+                            >
+                                <FortuneCard displayFortune={fortune || ""} />
+                                <MintFortuneButton fortune={fortune} />
+                            </motion.div>
+                        )}
+
+                        {/* Transaction History Section */}
+                        {isConnected && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="mt-6 w-full"
+                            >
+                                <TransactionHistory />
+                            </motion.div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="py-4 text-center text-gray-500 text-sm"
+                >
+                    <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 3</span></p>
+                </motion.div>
             </div>
-
-            {/* Footer */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="mt-auto py-4 text-center text-gray-500 text-sm z-10 relative"
-            >
-                <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 3</span></p>
-            </motion.div>
         </main>
     );
 }
