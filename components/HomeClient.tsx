@@ -218,7 +218,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             </motion.button>
                         )}
                         <ThemeToggle />
-                        {isConnected && (
+                        {isConnected && !isMiniApp && (
                             <Wallet>
                                 <ConnectWallet className="bg-transparent border border-white/10 hover:bg-white/5 rounded-full px-4 py-2">
                                     <Avatar className="h-6 w-6" />
