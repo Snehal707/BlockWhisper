@@ -7,32 +7,30 @@ interface ShareButtonsProps {
 }
 
 export function ShareButtons({ fortune }: ShareButtonsProps) {
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const APP_URL = 'https://block-whisper.vercel.app/';
+    const FARCASTER_MINIAPP_URL = 'https://farcaster.xyz/miniapps/_ZszEEpg5SFW/blockwhisper';
+    const BASE_APP_URL = 'https://base.app/app/https://block-whisper.vercel.app/';
 
     const handleTwitterShare = () => {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮✨\n\n"${fortune}"\n\nCheck yours at:`;
-        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(APP_URL)}`;
         window.open(url, '_blank');
     };
 
     const handleFarcasterShare = () => {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮\n\n"${fortune}"`;
-        const url = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(shareUrl)}`;
+        // For Farcaster, we embed the specific Mini App URL
+        const url = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(FARCASTER_MINIAPP_URL)}`;
         window.open(url, '_blank');
     };
 
-    const handleCopyLink = async () => {
-        try {
-            await navigator.clipboard.writeText(shareUrl);
-            alert('Link copied to clipboard!');
-        } catch (err) {
-            console.error('Failed to copy:', err);
-        }
+    const handleBaseShare = () => {
+        window.open(BASE_APP_URL, '_blank');
     };
 
     const handleTelegramShare = () => {
         const text = `I just revealed my onchain fortune on BlockWhisper! 🔮\n\n"${fortune}"`;
-        const url = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`;
+        const url = `https://t.me/share/url?url=${encodeURIComponent(APP_URL)}&text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
     };
 
@@ -76,9 +74,9 @@ export function ShareButtons({ fortune }: ShareButtonsProps) {
                         />
                     </button>
 
-                    {/* Base (Copy Link context) */}
+                    {/* Base (Open Base App) */}
                     <button
-                        onClick={handleCopyLink}
+                        onClick={handleBaseShare}
                         className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0052FF] hover:bg-[#004AD9] rounded-2xl flex items-center justify-center transition-all transform hover:scale-105 shadow-md group relative overflow-hidden"
                     >
                         <img
