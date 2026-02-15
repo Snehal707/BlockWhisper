@@ -5,6 +5,7 @@ import './globals.css';
 import '@coinbase/onchainkit/styles.css';
 import { OnchainProviders } from '@/components/OnchainProviders';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { FarcasterProvider } from '@/components/FarcasterProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <ThemeProvider>
-                    <OnchainProviders>{children}</OnchainProviders>
+                    <FarcasterProvider>
+                        <OnchainProviders>{children}</OnchainProviders>
+                    </FarcasterProvider>
                 </ThemeProvider>
             </body>
         </html>
