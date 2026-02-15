@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     other: {
         'fc:miniapp': JSON.stringify({
             version: '1',
-            imageUrl: 'https://block-whisper.vercel.app/logo.svg?v=3',
+            imageUrl: 'https://block-whisper.vercel.app/icon.png',
             button: {
                 title: 'Reveal Your Fortune',
                 action: {
                     type: 'launch_frame',
                     name: 'BlockWhisper',
                     url: 'https://block-whisper.vercel.app',
-                    splashImageUrl: 'https://block-whisper.vercel.app/logo.svg?v=3',
+                    splashImageUrl: 'https://block-whisper.vercel.app/icon.png',
                     splashBackgroundColor: '#0a0a1f',
                 },
             },
