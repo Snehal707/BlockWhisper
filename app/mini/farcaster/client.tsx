@@ -22,6 +22,7 @@ import { FortuneCard } from '../../../components/FortuneCard';
 import { MintFortuneButton } from '../../../components/MintFortuneButton';
 import { ShareButtons } from '../../../components/ShareButtons';
 import { ThemeToggle } from '../../../components/ThemeToggle';
+import { NotificationToggle } from '../../../components/NotificationToggle';
 import { TransactionHistory } from '../../../components/TransactionHistory';
 import { UserStats } from '../../../components/UserStats';
 
@@ -169,6 +170,7 @@ export default function FarcasterClient({ initialFortune }: FarcasterClientProps
                                 />
                             </motion.button>
                         )}
+                        <NotificationToggle />
                         <ThemeToggle />
                     </div>
                 </div>
