@@ -52,7 +52,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-4 relative overflow-hidden transition-colors duration-300"
+        <main className="flex min-h-[100dvh] flex-col items-center justify-start md:justify-center p-4 relative overflow-y-auto overflow-x-hidden transition-colors duration-300"
             style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
             <UserStats
                 address={address || ''}
@@ -192,7 +192,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             </div>
 
             {/* Main Content */}
-            <div className="relative z-10 flex flex-col items-center gap-4 max-w-4xl mx-auto">
+            <div className="relative z-10 flex flex-col items-center gap-4 max-w-4xl mx-auto w-full pt-20 pb-20">
                 {!isConnected && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -326,24 +326,12 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                 )}
             </div>
 
-            {/* Share Buttons - Pinned to bottom above footer */}
-            {fortune && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="absolute bottom-20 w-full z-10"
-                >
-                    <ShareButtons fortune={fortune} />
-                </motion.div>
-            )}
-
             {/* Footer */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                className="absolute bottom-4 text-center text-gray-500 text-sm z-10"
+                className="mt-auto py-4 text-center text-gray-500 text-sm z-10 relative"
             >
                 <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 3</span></p>
             </motion.div>
