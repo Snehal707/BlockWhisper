@@ -236,8 +236,10 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             </Wallet>
                         )}
                     </div>
+                </div>
 
-                    {/* Second Row: Farcaster Identity */}
+                {/* Second Row: Farcaster Identity (Mini App Only) */}
+                {isMiniApp && (
                     <div className="mt-2 flex justify-end pointer-events-auto">
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
@@ -256,7 +258,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
                             </span>
                         </motion.div>
                     </div>
-                </div>
+                )}
             </div>
 
             {/* Main Scroll Container */}
