@@ -9,6 +9,7 @@ import { useAccount } from 'wagmi';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { sdk } from '@farcaster/miniapp-sdk';
+import { useIsMiniApp } from '@/hooks/useIsMiniApp';
 import { FloatingObjects } from '@/components/FloatingObjects';
 import { FortuneCard } from './FortuneCard';
 import { MintFortuneButton } from './MintFortuneButton';
@@ -33,6 +34,22 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
         displayName?: string;
         pfpUrl?: string;
     }>({});
+
+    // Mini App Detection
+    const isMiniApp = useIsMiniApp();
+
+    // Dynamic styles based on environment
+    const shellClass = isMiniApp
+        ? "relative h-[100dvh] w-full overflow-hidden flex flex-col items-center p-4"
+        : "relative min-h-screen w-full overflow-x-hidden flex flex-col items-center p-8";
+
+    const contentClass = isMiniApp
+        ? "w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden"
+        : "w-full max-w-6xl flex-1";
+
+    const headerClass = isMiniApp
+        ? "z-20 w-full max-w-md overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none"
+        : "z-20 w-full max-w-6xl overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none";
 
     useEffect(() => {
         const loadUser = async () => {
@@ -70,7 +87,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
 
     return (
         <main
-            className="relative h-[100dvh] w-full overflow-hidden flex flex-col items-center p-4"
+            className={shellClass}
             style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
         >
             <UserStats
@@ -90,7 +107,7 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             {/* Header */}
             {/* Header */}
             {/* Header */}
-            <div className="z-20 w-full max-w-md overflow-hidden sticky top-0 pt-2 pb-2 bg-transparent pointer-events-none">
+            <div className={headerClass}>
                 <div className="flex items-center justify-between gap-2 pointer-events-auto">
                     <div className="min-w-0 flex-1">
                         <motion.div
@@ -216,11 +233,12 @@ export default function HomeClient({ initialFortune }: HomeClientProps) {
             </div>
 
             {/* Main Scroll Container */}
+            {/* Main Scroll Container */}
             <div
-                className="relative z-10 w-full max-w-md flex-1 overflow-y-auto overflow-x-hidden pb-6"
-                style={{ paddingTop: "max(1rem, env(safe-area-inset-top))" }}
+                className={`${contentClass} relative z-10 flex flex-col`}
+                style={{ paddingTop: isMiniApp ? "max(1rem, env(safe-area-inset-top))" : "1rem" }}
             >
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-4 flex-1">
                     {/* Main Content */}
                     <div className="relative w-full">
                         {!isConnected && (
