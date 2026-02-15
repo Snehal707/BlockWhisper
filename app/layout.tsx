@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     title: 'BlockWhisper',
     description: 'Your onchain fortune awaits.',
     other: {
-        'fc:frame': JSON.stringify({
-            version: 'next',
+        'fc:miniapp': JSON.stringify({
+            version: '1',
             imageUrl: 'https://blockwhisper.vercel.app/splash.png',
             button: {
                 title: 'Reveal Your Fortune',
