@@ -13,8 +13,8 @@ import {
     EthBalance,
     Name,
 } from '@coinbase/onchainkit/identity';
-import { useAccount } from 'wagmi';
-import { useState, useEffect } from 'react';
+import { useAccount, useConnect } from 'wagmi';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { sdk } from '@farcaster/miniapp-sdk';
 import { FloatingObjects } from '../../../components/FloatingObjects';
@@ -64,6 +64,25 @@ export default function FarcasterClient({ initialFortune }: FarcasterClientProps
         };
         loadUser();
     }, []);
+
+    const { connectors, connect, isPending } = useConnect();
+    const didTry = useRef(false);
+
+    useEffect(() => {
+        didTry.current = false;
+    }, [connectors.map(c => c.id).join(',')]);
+
+    useEffect(() => {
+        if (isConnected) return;
+        if (isPending) return;
+        if (didTry.current) return;
+
+        const first = connectors?.[0];
+        if (first) {
+            didTry.current = true;
+            connect({ connector: first });
+        }
+    }, [isConnected, isPending, connectors, connect]);
 
     const handleReveal = async () => {
         if (!address) return;
@@ -256,12 +275,26 @@ export default function FarcasterClient({ initialFortune }: FarcasterClientProps
                                     </motion.div>
 
                                     <div className="flex justify-center mt-6">
-                                        <Wallet>
-                                            <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all">
-                                                <span className="mr-2">Connect Wallet</span>
+                                        {isMiniApp ? (
+                                            <button
+                                                onClick={() => {
+                                                    const first = connectors?.[0];
+                                                    if (first) connect({ connector: first });
+                                                }}
+                                                disabled={isPending}
+                                                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center"
+                                            >
+                                                <span className="mr-2">{isPending ? 'Connecting...' : 'Connect Wallet'}</span>
                                                 <Avatar className="h-6 w-6" />
-                                            </ConnectWallet>
-                                        </Wallet>
+                                            </button>
+                                        ) : (
+                                            <Wallet>
+                                                <ConnectWallet className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all">
+                                                    <span className="mr-2">Connect Wallet</span>
+                                                    <Avatar className="h-6 w-6" />
+                                                </ConnectWallet>
+                                            </Wallet>
+                                        )}
                                     </div>
                                 </motion.div>
                             )}

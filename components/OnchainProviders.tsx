@@ -1,32 +1,36 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { base } from 'viem/chains';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { coinbaseWallet } from 'wagmi/connectors';
+import { farcasterFrame } from "@farcaster/miniapp-wagmi-connector";
+import { useIsMiniApp } from '../hooks/useIsMiniApp';
 
 const queryClient = new QueryClient();
 
-const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
-
-const output = createConfig({
-    chains: [base],
-    connectors: [
-        coinbaseWallet({
-            appName: 'BlockWhisper',
-        }),
-    ],
-    transports: {
-        [base.id]: http(),
-    },
-    ssr: true,
-});
-
 export function OnchainProviders({ children }: { children: ReactNode }) {
+    const isMiniApp = useIsMiniApp();
+
+    const config = useMemo(() => {
+        const connectors = isMiniApp
+            ? [farcasterFrame()]
+            : [coinbaseWallet({ appName: "BlockWhisper" })];
+
+        return createConfig({
+            chains: [base],
+            connectors,
+            transports: {
+                [base.id]: http(),
+            },
+            ssr: true,
+        });
+    }, [isMiniApp]);
+
     return (
-        <WagmiProvider config={output}>
+        <WagmiProvider config={config} key={isMiniApp ? "miniapp" : "web"}>
             <QueryClientProvider client={queryClient}>
                 <OnchainKitProvider
                     chain={base}
