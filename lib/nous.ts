@@ -1,6 +1,6 @@
 
 const NOUS_API_KEY = process.env.NOUS_API_KEY;
-const NOUS_API_URL = process.env.NOUS_API_URL || 'https://api.nousresearch.com/v1/chat/completions';
+const NOUS_API_URL = process.env.NOUS_API_URL || 'https://inference-api.nousresearch.com/v1/chat/completions';
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 interface FortuneResponse {
@@ -12,8 +12,8 @@ export async function generateFortune(summary: string): Promise<FortuneResponse>
     // Try Nous first, then OpenAI, then mock
     if (NOUS_API_KEY) {
         try {
-            console.log('🤖 Generating fortune using Nous Research (Hermes 3)...');
-            return await callLLMAPI(NOUS_API_URL, NOUS_API_KEY, "Hermes-3-Llama-3.1-405B", summary);
+            console.log('🤖 Generating fortune using Nous Research (Hermes 4)...');
+            return await callLLMAPI(NOUS_API_URL, NOUS_API_KEY, "Hermes-4-405B", summary);
         } catch (error) {
             console.error('Nous API failed:', error);
             // Fall through to OpenAI

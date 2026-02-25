@@ -321,7 +321,7 @@ export default function WebClient({ initialFortune }: WebClientProps) {
                     transition={{ delay: 1 }}
                     className={footerClass}
                 >
-                    <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 3</span></p>
+                    <p>Built on <span className="text-blue-400 font-semibold">Base</span> • Powered by <span className="text-purple-400 font-semibold">Nous Hermes 4</span></p>
                 </motion.div>
             </div>
         </main>

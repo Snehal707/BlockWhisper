@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     const NOUS_API_KEY = process.env.NOUS_API_KEY;
-    const NOUS_API_URL = process.env.NOUS_API_URL || 'https://api.nousresearch.com/v1/chat/completions';
+    const NOUS_API_URL = process.env.NOUS_API_URL || 'https://inference-api.nousresearch.com/v1/chat/completions';
 
     if (!NOUS_API_KEY) {
         return NextResponse.json({
@@ -22,7 +22,7 @@ export async function GET() {
                 'Authorization': `Bearer ${NOUS_API_KEY}`
             },
             body: JSON.stringify({
-                model: "Hermes-3-Llama-3.1-405B",
+                model: "Hermes-4-405B",
                 messages: [
                     { role: "user", content: "pong" }
                 ],
@@ -47,7 +47,7 @@ export async function GET() {
             message: 'Nous API is configured and responding correctly',
             configured: true,
             url: NOUS_API_URL,
-            model: "Hermes-3-Llama-3.1-405B",
+            model: "Hermes-4-70B",
             responsePreview: data.choices?.[0]?.message?.content
         });
 
